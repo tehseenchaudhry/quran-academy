@@ -161,7 +161,7 @@ const Footer = () => {
 
             <div className="space-y-4 text-white/90">
 
-              <div className="flex items-start gap-3 hover:text-[#c9a050] transition-all duration-300">
+              <div className="flex items-start gap-3  ">
                 <FaMapMarkerAlt className="mt-1 text-[#c9a050] shrink-0" />
 
                 <span>
@@ -170,7 +170,7 @@ const Footer = () => {
                 </span>
               </div>
 
-              <div className="flex items-center gap-3 hover:text-[#c9a050] transition-all duration-300">
+              <div className="flex items-center gap-3 ">
                 <FaPhoneAlt className="text-[#c9a050] shrink-0" />
 
                 <span>
@@ -178,7 +178,7 @@ const Footer = () => {
                 </span>
               </div>
 
-              <div className="flex items-center gap-3 hover:text-[#c9a050] transition-all duration-300">
+              <div className="flex items-center gap-3 ">
                 <FaEnvelope className="text-[#c9a050] shrink-0" />
 
                 <span>
@@ -220,7 +220,6 @@ const Footer = () => {
         {/* Bottom */}
         <div
           className="border-t border-white/20 mt-10 pt-6 text-center text-sm text-white/80"
-          data-aos="fade-up"
         >
           <p>
             © 2026 Online Quran Academy. All rights reserved.
