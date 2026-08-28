@@ -37,6 +37,9 @@ import FeeManagement from "./AdminDashboard/adminDashboardPages/FeeManagement";
 import Reports from "./AdminDashboard/adminDashboardPages/Reports";
 import PrivacyPolicy from "./common/PrivacyPolicy";
 import TermsConditions from "./common/TermsConditions";
+import VerifyOtp from "./common/VerifyOtp";
+import ResetPassword from "./common/ResetPassword";
+import UserProfile from "./common/UserProfile";
 
 function App() {
 
@@ -76,7 +79,10 @@ function App() {
         <Route path="/free-trial-class" element={<FreeTrialClass />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/*  DASHBOARD ROUTES  */}
         <Route path="/dashboard" element={<AdminDashboardLayout />}>

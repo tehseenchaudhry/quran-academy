@@ -8,58 +8,15 @@ const ForgotPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Yahan baad mein Firebase / Backend reset-password logic add kar sakte ho
     console.log("Reset password for:", email);
   };
 
   return (
     <div className="min-h-screen bg-[#f8f6ef] flex items-center justify-center px-4 py-10">
 
-      <div className="w-full  max-w-5xl grid md:grid-cols-2 bg-white rounded-3xl shadow-2xl overflow-hidden">
+      <div className="w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden">
 
-        {/* LEFT SIDE */}
-        <div className="hidden md:flex relative bg-[#0a5c3a] items-center justify-center p-12 overflow-hidden">
-
-          {/* Decorative Circles */}
-          <div className="absolute -top-20 -left-20 w-56 h-56 rounded-full bg-[#c9a050]/10" />
-
-          <div className="absolute -bottom-24 -right-20 w-72 h-72 rounded-full bg-[#c9a050]/10" />
-
-          <div className="relative z-10 text-center text-white">
-
-            <img
-              src="/logo.jpg"
-              alt="Al Hafiz Online"
-              className="w-[120px] h-24 rounded-2xl mx-auto mb-6 shadow-xl border-2 border-[#c9a050]"
-            />
-
-            <h1 className="text-3xl font-bold mb-3">
-              Al Hafiz-Online
-            </h1>
-
-            <p className="text-[#f5d48a] font-medium mb-6">
-              Learn Quran Online
-            </p>
-
-            <p className="text-white/70 leading-relaxed max-w-sm mx-auto">
-              Don't worry if you forgot your password. We will help you
-              get back to your Quran learning journey.
-            </p>
-
-            <div className="mt-8 h-px w-24 bg-[#c9a050] mx-auto" />
-
-            <p className="mt-6 text-[#f5d48a] text-lg">
-              فَإِنَّ مَعَ الْعُسْرِ يُسْرًا
-            </p>
-
-            <p className="text-white/60 text-sm mt-2">
-              "Indeed, with hardship comes ease."
-            </p>
-
-          </div>
-        </div>
-
-        {/* RIGHT SIDE */}
+        {/* FORM SIDE */}
         <div className="p-8 sm:p-12 md:p-14 flex flex-col justify-center">
 
           {/* Heading */}

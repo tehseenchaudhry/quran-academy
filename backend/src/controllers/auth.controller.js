@@ -130,3 +130,16 @@ export const logOut = async(req, res) => {
     })
 
 }
+
+export const userProfile= async (req, res) => {
+    console.log("my req user", req.user);
+
+
+    res.json({
+        success: true,
+        message: "my req user",
+        user: req.user
+    })
+
+
+}

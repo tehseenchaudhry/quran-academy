@@ -10,10 +10,9 @@ import {
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#f8f6ef] flex items-center justify-center px-4 py-10">
+    <div className="min-h-screen bg-[#f8f6ef] flex items-center justify-center px-4 py-7">
 
       <div className="w-full max-w-5xl grid md:grid-cols-2 bg-white rounded-3xl shadow-2xl overflow-hidden">
 
@@ -59,14 +58,14 @@ const Signup = () => {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="p-8">
+        <div className="p-8 pt-3">
 
           {/* HEADING */}
           <div className="mb-4">
 
-            <p className="text-[#c9a050] font-semibold text-sm uppercase tracking-wider mb-1">
+            {/* <p className="text-[#c9a050] font-semibold text-sm uppercase tracking-wider mb-1">
               Get Started
-            </p>
+            </p> */}
 
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0a5c3a]">
               Create Your Account
@@ -82,106 +81,61 @@ const Signup = () => {
           <form className="space-y-3">
 
             {/* NAME */}
-            <div>
+              <div className="group relative text-gray-400 font-semibold">
+  <FaUser className="absolute text-[14px] left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors" />
 
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Full Name
-              </label>
-
-              <div className="relative">
-
-                <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9a050]" />
-
-                <input
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-                />
-
-              </div>
-
-            </div>
+  <input
+    type="text"
+    placeholder="Enter your full name"
+    className="w-full pl-11 pr-4 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+  />
+</div>
 
             {/* EMAIL */}
-            <div>
+              <div className="group relative text-gray-400 font-semibold">
+  <FaEnvelope className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors" />
 
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Email Address
-              </label>
+  <input
+    type="email"
+    placeholder="Enter your email"
+    className="w-full pl-11 pr-4 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+  />
+</div>
 
-              <div className="relative">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9a050]" />
+  {/* PASSWORD */}
+  <div className="group relative text-gray-400 font-semibold">
+  <FaLock className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors"
+  />
+    <input
+      type={showPassword ? "text" : "password"}
+      placeholder="Password"
+      className="w-full pl-11 pr-12 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+    />
 
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-                />
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
+    >
+      {showPassword ? <FaEyeSlash /> : <FaEye />}
+    </button>
+  </div>
 
-              </div>
+  {/* CONFIRM PASSWORD */}
+  <div className="group relative text-gray-400 font-semibold">
+  <FaLock className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#c9a050] transition-colors"
+  />
 
-            </div>
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Confirm Password"
+    className="w-full px-10 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+  />
+</div>
 
-            {/* PASSWORD */}
-            <div>
-
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Password
-              </label>
-
-              <div className="relative">
-
-                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9a050]" />
-
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Create a password"
-                  className="w-full pl-11 pr-12 py-3.5 rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-                />
-
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
-
-              </div>
-
-            </div>
-
-            {/* CONFIRM PASSWORD */}
-            <div>
-
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Confirm Password
-              </label>
-
-              <div className="relative">
-
-                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9a050]" />
-
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm your password"
-                  className="w-full pl-11 pr-12 py-3.5 rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-                />
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    setShowConfirmPassword(!showConfirmPassword)
-                  }
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
-                >
-                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
-
-              </div>
-
-            </div>
+</div>
 
             {/* TERMS */}
             <div className="flex items-start gap-2 pt-1">
@@ -210,7 +164,7 @@ const Signup = () => {
             </button>
 
             {/* OR */}
-            <div className="relative flex items-center py-2">
+            <div className="relative flex items-center ">
 
               <div className="flex-1 border-t border-gray-200" />
 
@@ -225,7 +179,7 @@ const Signup = () => {
             {/* GOOGLE */}
             <button
               type="button"
-              className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 hover:border-[#c9a050] hover:shadow-md text-gray-700 font-medium py-2.5 rounded-xl transition-all duration-300 group"
+              className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 hover:border-[#c9a050] hover:shadow-md text-gray-700 font-medium py-2 rounded-xl transition-all duration-300 group"
             >
 
               <svg
