@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   FaUser,
   FaEnvelope,
@@ -7,9 +8,78 @@ import {
   FaEye,
   FaEyeSlash,
 } from "react-icons/fa6";
+import { useSignUpMutation } from "../app/api/userApi";
+// import { useSignUpMutation } from "../api/userApi";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [formdata, setFormdeta] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    isAgree: false,
+  })
+
+  const navigate = useNavigate();
+
+  const [signUp, { isLoading, error }] = useSignUpMutation();
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+
+    setFormdeta((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+
+    }))
+
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (formdata.password !== formdata.confirmPassword) {
+      return toast("Passwords do not match.", {
+        type: "error"
+      })
+
+    }
+
+    if (!formdata.isAgree) {
+      return toast("Please accept the Terms and Privacy Policy.", {
+        type: "error"
+      })
+
+    }
+
+    try {
+
+
+      await signUp(formdata).unwrap()
+      toast("Account created successfully!", {
+        type: "success"
+      })
+
+      navigate("/verify-otp",
+        //  {
+        // state: {
+        //   email: formData?.email,
+        // },
+        // }
+      );
+    }catch (err) {
+  console.log("SIGNUP ERROR:", err);
+
+  toast(
+    err?.data?.message || "Failed to create account.",
+    { type: "error" }
+  );
+}
+
+  }
+
 
   return (
     <div className="min-h-screen bg-[#f8f6ef] flex items-center justify-center px-4 py-7">
@@ -78,75 +148,91 @@ const Signup = () => {
           </div>
 
           {/* FORM */}
-          <form className="space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-3">
 
             {/* NAME */}
-              <div className="group relative text-gray-400 font-semibold">
-  <FaUser className="absolute text-[14px] left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors" />
+            <div className="group relative text-gray-400 font-semibold">
+              <FaUser className="absolute text-[14px] left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors" />
 
-  <input
-    type="text"
-    placeholder="Enter your full name"
-    className="w-full pl-11 pr-4 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-  />
-</div>
+              <input
+                type="text"
+                name="name"
+                value={formdata.name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+                className="w-full pl-11 pr-4 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+              />
+            </div>
 
             {/* EMAIL */}
+            <div className="group relative text-gray-400 font-semibold">
+              <FaEnvelope className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors" />
+
+              <input
+                type="email"
+                name="email"
+                value={formdata.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                className="w-full pl-11 pr-4 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              {/* PASSWORD */}
               <div className="group relative text-gray-400 font-semibold">
-  <FaEnvelope className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors" />
+                <FaLock className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors"
+                />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Password"
+                  value={formdata.password}
+                  onChange={handleChange}
+                  className="w-full pl-11 pr-12 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+                />
 
-  <input
-    type="email"
-    placeholder="Enter your email"
-    className="w-full pl-11 pr-4 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-  />
-</div>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
 
-<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* CONFIRM PASSWORD */}
+              <div className="group relative text-gray-400 font-semibold">
+                <FaLock className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#c9a050] transition-colors"
+                />
 
-  {/* PASSWORD */}
-  <div className="group relative text-gray-400 font-semibold">
-  <FaLock className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2  group-focus-within:text-[#c9a050] transition-colors"
-  />
-    <input
-      type={showPassword ? "text" : "password"}
-      placeholder="Password"
-      className="w-full pl-11 pr-12 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-    />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formdata.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm Password"
+                  className="w-full px-10 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+                />
+              </div>
 
-    <button
-      type="button"
-      onClick={() => setShowPassword(!showPassword)}
-      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
-    >
-      {showPassword ? <FaEyeSlash /> : <FaEye />}
-    </button>
-  </div>
-
-  {/* CONFIRM PASSWORD */}
-  <div className="group relative text-gray-400 font-semibold">
-  <FaLock className="absolute text-[14px]  left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#c9a050] transition-colors"
-  />
-
-  <input
-    type={showPassword ? "text" : "password"}
-    placeholder="Confirm Password"
-    className="w-full px-10 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-  />
-</div>
-
-</div>
+            </div>
 
             {/* TERMS */}
             <div className="flex items-start gap-2 pt-1">
 
               <input
                 type="checkbox"
+                name="isAgree"
+                checked={formdata.isAgree}
+                onChange={handleChange}
                 className="w-4 h-4 mt-1 accent-[#0a5c3a]"
               />
 
               <p className="text-sm text-gray-500">
                 I agree to the{" "}
+
                 <span className="text-[#0a5c3a] font-semibold">
                   Terms & Conditions
                 </span>{" "}
@@ -157,10 +243,12 @@ const Signup = () => {
 
             {/* SIGNUP BUTTON */}
             <button
-              type="button"
+              disabled={isLoading}
+              type="submit"
               className="w-full py-3.5 rounded-xl bg-[#0a5c3a] text-white font-semibold hover:bg-[#c9a050] transition-all duration-300 shadow-lg hover:-translate-y-0.5"
             >
-              Create Account
+              {isLoading ? "Creating Account..." : "Create Account"}
+
             </button>
 
             {/* OR */}

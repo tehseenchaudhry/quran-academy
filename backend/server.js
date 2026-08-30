@@ -1,4 +1,4 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import cors from "cors";
 import dotenv from "dotenv/config";
 import db from "./src/config/db.js";
@@ -15,8 +15,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     origin: "http://localhost:5173",
-    methods: ["POST", "PUT", "DELETE", "GET"]
+    methods: ["POST", "PUT", "DELETE", "GET"],
+    credentials: true
 }));
+app.use(urlencoded({extended:true}))
 
 
 app.use("/api/v1/user", authRoutes)

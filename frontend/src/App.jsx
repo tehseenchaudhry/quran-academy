@@ -40,6 +40,7 @@ import TermsConditions from "./common/TermsConditions";
 import VerifyOtp from "./common/VerifyOtp";
 import ResetPassword from "./common/ResetPassword";
 import UserProfile from "./common/UserProfile";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 
@@ -101,7 +102,7 @@ function App() {
         </Route>
 
       </Routes>
-
+<ToastContainer />
     </BrowserRouter>
   );
 }
