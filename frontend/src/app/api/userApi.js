@@ -18,14 +18,47 @@
             })
         }),
 
+
+        otpVerify: builder.mutation({
+             query:(credentials)=>({
+                url:"/verify-otp",
+                method:"POST",
+                body: credentials
+             })
+        }),
+
+        otpResend: builder.mutation({
+             query:(credentials)=>({
+                url:"/resend-otp",
+                method:"POST",
+                body: credentials
+             })
+        }),
+
         logIn: builder.mutation({
             query:(credentials)=>({
                 url:"/login",
                 method:"POST",
                 body:credentials
             })
-        })
+        }),
+
+        logOut: builder.mutation({
+             query:()=>({
+                url:"/logout",
+                method:"POST",
+              
+             })
+        }),
+        myProfile: builder.query({
+             query:()=>({
+                url:"/user-profile",
+                method:"GET",
+             })
+        }),
+
+
     })
  })
 
- export const {useSignUpMutation, useLogInMutation} = authApi
+ export const {useSignUpMutation, useOtpVerifyMutation, useOtpResendMutation, useLogInMutation, useLogOutMutation, useMyProfileQuery} = authApi;

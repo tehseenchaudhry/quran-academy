@@ -5,9 +5,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./common/ScrollToTop";
 import MainLayout from "./pages/MainLayout";
 import Home from "./pages/Home";
-import SignUp from "./common/SignUp";
-import Login from "./common/Login";
-import ForgotPassword from "./common/ForgotPassword";
 import FreeTrialClass from "./common/FreeTrialClass";
 import About from "./pages/About";
 import Fee from "./pages/Fee";
@@ -37,10 +34,16 @@ import FeeManagement from "./AdminDashboard/adminDashboardPages/FeeManagement";
 import Reports from "./AdminDashboard/adminDashboardPages/Reports";
 import PrivacyPolicy from "./common/PrivacyPolicy";
 import TermsConditions from "./common/TermsConditions";
-import VerifyOtp from "./common/VerifyOtp";
-import ResetPassword from "./common/ResetPassword";
-import UserProfile from "./common/UserProfile";
 import { ToastContainer } from "react-toastify";
+  // AUTH Imports  
+import Login from "./common/auth/Login";
+import UserProfile from "./common/auth/UserProfile";
+import ResetPassword from "./common/auth/ResetPassword";
+import Signup from "./common/auth/Signup";
+import VerifyOtp from "./common/auth/VerifyOtp";
+import ForgotPassword from "./common/auth/ForgotPassword";
+
+// CLASS Imports 
 
 function App() {
 
@@ -76,9 +79,9 @@ function App() {
           <Route path="/terms-conditions" element={<TermsConditions />} />
         </Route>
 
-        {/*  AUTH ROUTES  */}
-        <Route path="/free-trial-class" element={<FreeTrialClass />} />
-        <Route path="/signup" element={<SignUp />} />
+      
+         {/*  AUTH ROUTES  */}
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/verify-otp" element={<VerifyOtp />} />
@@ -100,7 +103,7 @@ function App() {
           <Route path="classes" element={<AllClasses />} />
           <Route path="classes/:id" element={<ClassDetail />} />
         </Route>
-
+  <Route path="/free-trial-class" element={<FreeTrialClass />} />
       </Routes>
 <ToastContainer />
     </BrowserRouter>

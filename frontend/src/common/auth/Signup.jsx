@@ -8,7 +8,7 @@ import {
   FaEye,
   FaEyeSlash,
 } from "react-icons/fa6";
-import { useSignUpMutation } from "../app/api/userApi";
+import { useSignUpMutation } from "../../app/api/userApi";
 // import { useSignUpMutation } from "../api/userApi";
 
 const Signup = () => {
@@ -57,23 +57,25 @@ const Signup = () => {
     try {
 
 
-      await signUp(formdata).unwrap()
+      await signUp(formdata).unwrap({
+        name: formdata.name,
+
+      })
       toast("Account created successfully!", {
         type: "success"
       })
 
       navigate("/verify-otp",
-        //  {
-        // state: {
-        //   email: formData?.email,
-        // },
-        // }
+         {
+        state: {
+          email: formdata?.email,
+        },
+        }
       );
     }catch (err) {
   console.log("SIGNUP ERROR:", err);
 
-  toast(
-    err?.data?.message || "Failed to create account.",
+  toast(err?.data?.message || "Failed to create account.",
     { type: "error" }
   );
 }
@@ -157,6 +159,7 @@ const Signup = () => {
               <input
                 type="text"
                 name="name"
+                required
                 value={formdata.name}
                 onChange={handleChange}
                 placeholder="Enter your full name"
@@ -171,6 +174,7 @@ const Signup = () => {
               <input
                 type="email"
                 name="email"
+                required
                 value={formdata.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
@@ -187,6 +191,7 @@ const Signup = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
+                  required
                   placeholder="Password"
                   value={formdata.password}
                   onChange={handleChange}
