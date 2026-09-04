@@ -22,10 +22,6 @@ const userSchema = new mongoose.Schema({
         enum:["admin", "user"],
          default:"user"
     },
-    isAgree:{
-        type:Boolean,
-         required:true
-    },
      otp:{
         type:String,
          default:null

@@ -9,7 +9,6 @@ import {
   FaEyeSlash,
 } from "react-icons/fa6";
 import { useSignUpMutation } from "../../app/api/userApi";
-// import { useSignUpMutation } from "../api/userApi";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -57,10 +56,7 @@ const Signup = () => {
     try {
 
 
-      await signUp(formdata).unwrap({
-        name: formdata.name,
-
-      })
+      await signUp(formdata).unwrap()
       toast("Account created successfully!", {
         type: "success"
       })
@@ -130,14 +126,14 @@ const Signup = () => {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="p-8 pt-3">
+        <div className="p-8 pt-6">
 
           {/* HEADING */}
           <div className="mb-4">
 
-            {/* <p className="text-[#c9a050] font-semibold text-sm uppercase tracking-wider mb-1">
+            <p className="text-[#c9a050] font-semibold text-sm uppercase tracking-wider mb-1">
               Get Started
-            </p> */}
+            </p>
 
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0a5c3a]">
               Create Your Account
@@ -163,7 +159,7 @@ const Signup = () => {
                 value={formdata.name}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className="w-full pl-11 pr-4 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+                className="w-full pl-11 pr-4 py-2.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
               />
             </div>
 
@@ -178,7 +174,7 @@ const Signup = () => {
                 value={formdata.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="w-full pl-11 pr-4 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+                className="w-full pl-11 pr-4 py-2.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
               />
             </div>
 
@@ -195,7 +191,7 @@ const Signup = () => {
                   placeholder="Password"
                   value={formdata.password}
                   onChange={handleChange}
-                  className="w-full pl-11 pr-12 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+                  className="w-full pl-11 pr-12 py-2.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
                 />
 
                 <button
@@ -218,7 +214,7 @@ const Signup = () => {
                   value={formdata.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm Password"
-                  className="w-full px-10 py-3.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+                  className="w-full px-10 py-2.5 text-gray-500  rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
                 />
               </div>
 
@@ -250,7 +246,7 @@ const Signup = () => {
             <button
               disabled={isLoading}
               type="submit"
-              className="w-full py-3.5 rounded-xl bg-[#0a5c3a] text-white font-semibold hover:bg-[#c9a050] transition-all duration-300 shadow-lg hover:-translate-y-0.5"
+              className="w-full py-2.5 rounded-xl bg-[#0a5c3a] text-white font-semibold hover:bg-[#c9a050] transition-all duration-300 shadow-lg hover:-translate-y-0.5"
             >
               {isLoading ? "Creating Account..." : "Create Account"}
 

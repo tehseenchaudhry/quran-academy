@@ -29,7 +29,7 @@ const ForgotPassword = () => {
             <p className="text-gray-500 mt-3 leading-relaxed">
               Enter your email address and we'll send you a link to
               reset your password.
-             
+
             </p>
 
           </div>
@@ -58,29 +58,29 @@ const ForgotPassword = () => {
 
             </div>
 
-          {/* Reset Button */}
-<button
-  type="submit"
-  className="w-full py-3.5 rounded-xl bg-[#0a5c3a] text-white font-semibold hover:bg-[#c9a050] transition-all duration-300 shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-3 group"
->
-  <span>Send reset code</span>
-  <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-</button>
+            {/* Reset Button */}
+            <button
+              type="submit"
+              className="w-full py-3.5 rounded-xl bg-[#0a5c3a] text-white font-semibold hover:bg-[#c9a050] transition-all duration-300 shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-3 group"
+            >
+              <span>Send reset code</span>
+              <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
 
           </form>
 
           {/* Back To Login */}
           <div className="text-center mt-7">
-  <p className="text-sm text-gray-500">
-    Remembered it?{" "}
-    <Link
-      to="/login"
-      className="font-semibold text-[#0a5c3a] hover:text-[#c9a050] transition"
-    >
-      Back to Login
-    </Link>
-  </p>
-</div>
+            <p className="text-sm text-gray-500">
+              Remembered it?{" "}
+              <Link
+                to="/login"
+                className="font-semibold text-[#0a5c3a] hover:text-[#c9a050] transition"
+              >
+                Back to Login
+              </Link>
+            </p>
+          </div>
 
         </div>
 

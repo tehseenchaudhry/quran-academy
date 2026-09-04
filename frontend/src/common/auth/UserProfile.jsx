@@ -8,16 +8,17 @@ import {
   FaUser,
   FaEnvelope,
 } from "react-icons/fa6";
+import { useMyProfileQuery } from "../../app/api/userApi";
 
 const UserProfile = () => {
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+   const { data, error, isLoading, isError, isSuccess } = useMyProfileQuery();
+  const [ showPassword, setShowPassword] = useState(false);
 
   const [profile, setProfile] = useState({
-    username: "yourusername",
-    email: "your@email.com",
-    fullName: "Your Name",
+    username: "",
+    email: "",
+    fullName: "",
   });
 
   const [passwords, setPasswords] = useState({
@@ -190,7 +191,7 @@ const UserProfile = () => {
                   <input
                     type="email"
                     name="email"
-                    value={profile.email}
+                    value={data?.profile?.email}
                     onChange={handleProfileChange}
                     className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
                   />
@@ -235,8 +236,8 @@ const UserProfile = () => {
 
                   <input
                     type="text"
-                    name="fullName"
-                    value={profile.fullName}
+                    name="name"
+                    value={data?.profile?.name}
                     onChange={handleProfileChange}
                     className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
                   />
@@ -285,9 +286,9 @@ const UserProfile = () => {
                   <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9a050]" />
 
                   <input
-                    type={showCurrentPassword ? "text" : "password"}
+                    type={ showPassword ? "text" : "password"}
                     name="currentPassword"
-                    value={passwords.currentPassword}
+                    value={passwords. showPassword}
                     onChange={handlePasswordChange}
                     placeholder="Enter current password"
                     required
@@ -297,11 +298,11 @@ const UserProfile = () => {
                   <button
                     type="button"
                     onClick={() =>
-                      setShowCurrentPassword(!showCurrentPassword)
+                      setShowPassword(! showPassword)
                     }
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
                   >
-                    {showCurrentPassword ? <FaEyeSlash /> : <FaEye />}
+                    { showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
 
                 </div>
@@ -320,7 +321,7 @@ const UserProfile = () => {
                   <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9a050]" />
 
                   <input
-                    type={showNewPassword ? "text" : "password"}
+                    type={ showPassword ? "text" : "password"}
                     name="newPassword"
                     value={passwords.newPassword}
                     onChange={handlePasswordChange}
@@ -330,13 +331,13 @@ const UserProfile = () => {
                     className="w-full pl-11 pr-12 py-3.5 rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
                   />
 
-                  <button
+                  {/* <button
                     type="button"
-                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    onClick={() => setShowPassword(! showPassword)}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
                   >
-                    {showNewPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
+                    { showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button> */}
 
                 </div>
 
@@ -354,7 +355,7 @@ const UserProfile = () => {
                   <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9a050]" />
 
                   <input
-                    type={showConfirmPassword ? "text" : "password"}
+                    type={ showPassword ? "text" : "password"}
                     name="confirmPassword"
                     value={passwords.confirmPassword}
                     onChange={handlePasswordChange}
@@ -364,15 +365,15 @@ const UserProfile = () => {
                     className="w-full pl-11 pr-12 py-3.5 rounded-xl border border-gray-200 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
                   />
 
-                  <button
+                  {/* <button
                     type="button"
                     onClick={() =>
-                      setShowConfirmPassword(!showConfirmPassword)
+                      showPassword(!  showPassword)
                     }
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
                   >
-                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
+                    {  showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button> */}
 
                 </div>
 

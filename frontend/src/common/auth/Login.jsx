@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaEnvelope,
   FaLock,
@@ -7,10 +7,51 @@ import {
   FaEyeSlash,
   FaGoogle,
 } from "react-icons/fa6";
+import { useLogInMutation } from "../../app/api/userApi";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [formdata, setFormdeta] = useState({
+    email:"",
+    password:"",
+    Remember: false
+  })
 
+
+  const navigate = useNavigate();
+
+  const[signIn, {isLoading, error}] = useLogInMutation();
+
+  
+  
+  const handleChange = (e) =>{
+    const{name, type, checked, value} = e.target
+    setFormdeta((prev) =>({
+      ...prev,
+      [name]:type === "checkbox"? checked : value
+    }))
+  }
+
+
+  const handleSubmit = async(e) =>{
+    e.preventDefault();
+
+try {
+  await signIn(formdata).unwrap();
+   toast("login successfully!", { type: "success" })
+    navigate("/")
+  
+} catch (error) {
+   toast(
+  error?.data?.message || "user not login",{type:"error"})
+  
+}
+
+
+
+
+  }
   return (
     <div className="min-h-screen bg-[#f8f6ef] flex items-center justify-center px-4 py-10">
 
@@ -79,71 +120,80 @@ const Login = () => {
           </div>
 
           {/* FORM */}
-          <form className="space-y-3">
+          <form className="space-y-3 " onSubmit={handleSubmit}>
 
             {/* Email */}
             <div>
 
 
               <div className="group relative text-gray-400 font-semibold">
-  <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2   group-focus-within:text-[#c9a050] transition-colors" />
+                <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2   group-focus-within:text-[#c9a050] transition-colors" />
 
-  <input
-    type="email"
-    placeholder="Enter your email"
-    className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 text-gray-500 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-  />
-</div>
+                <input
+                  type="email"
+                  onChange={handleChange}
+                  value={formdata.email}
+                  name="email"
+                  placeholder="Enter your email"
+                  className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-gray-200 text-gray-500 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+                />
+              </div>
 
             </div>
 
             {/* Password */}
-              <div className="group relative text-gray-400 font-semibold">
-  <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#c9a050] transition-colors" />
+            <div className="group relative text-gray-400 font-semibold">
+              <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#c9a050] transition-colors" />
 
 
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  className="w-full pl-11 pr-12 py-3.5 rounded-xl border border-gray-200 text-gray-500 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
-                />
+              <input
+                type={showPassword ? "text" : "password"}
+                onChange={handleChange}
+                name="password"
+                value={formdata.password}
+                placeholder="Enter your password"
+                className="w-full pl-11 pr-12 py-2.5 rounded-xl border border-gray-200 text-gray-500 bg-[#fafafa] outline-none focus:border-[#c9a050] focus:ring-2 focus:ring-[#c9a050]/20 transition"
+              />
 
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0a5c3a]"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
 
-              </div>
+            </div>
 
             {/* Remember Me */}
             <div className="flex justify-between items-center mb-2">
-            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2">
 
-              <input
-                type="checkbox"
-                className="w-4 h-4 accent-[#0a5c3a]"
-              />
+                <input
+                  type="checkbox"
+                  name="Remember"
+                  checked={formdata.Remember}
+                  onChange={handleChange}
+                  className="w-4 h-4 accent-[#0a5c3a]"
+                />
 
-              <span className="text-sm text-gray-600">
-                Remember me
-              </span>
+                <span className="text-sm text-gray-600">
+                  Remember me
+                </span>
 
+              </div>
+              <Link
+                to="/forgot-password"
+                className="text-sm text-[#c9a050] hover:text-[#0a5c3a] font-medium"
+              >
+                Forgot Password?
+              </Link>
             </div>
-            <Link
-                  to="/forgot-password"
-                  className="text-sm text-[#c9a050] hover:text-[#0a5c3a] font-medium"
-                >
-                  Forgot Password?
-                </Link>
-                </div>
 
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full py-3.5 rounded-xl bg-[#0a5c3a] text-white font-semibold hover:bg-[#c9a050] transition-all duration-300 shadow-lg hover:-translate-y-0.5"
+              className="w-full py-2.5 rounded-xl bg-[#0a5c3a] text-white font-semibold hover:bg-[#c9a050] transition-all duration-300 shadow-lg hover:-translate-y-0.5"
             >
               Login
             </button>

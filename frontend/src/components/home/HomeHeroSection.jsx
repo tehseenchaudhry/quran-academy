@@ -14,8 +14,8 @@ const slides = [
     title: "Learn Anytime, Anywhere",
     subtitle: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
     desc: "Flexible timings for kids and adults—join from any device.",
-    btn1: { text: "Explore Our Courses", link: "/courses" },
-    btn2: { text: "Free Trial Class", link: "/freeTrialClass" },
+    btn1: { text: "Explore Our Courses", link: "/services" },
+    btn2: { text: "Free Trial Class", link: "/free-trial-class" },
   },
   {
     img: "/homehero2.jpg",
@@ -23,7 +23,7 @@ const slides = [
     subtitle: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
     desc: "Start from the Arabic alphabet and master makharij with certified tutors.",
     btn1: { text: "Explore Our Courses", link: "/services" },
-    btn2: { text: "Free Trial Class", link: "/freeTrialClass" },
+    btn2: { text: "Free Trial Class", link: "/free-trial-class" },
   },
   {
     img: "/homehero3.jpg",
@@ -31,7 +31,7 @@ const slides = [
     subtitle: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
     desc: "Live one-on-one sessions, feedback, and personalized lesson plans.",
     btn1: { text: "Explore Our Courses", link: "/services" },
-    btn2: { text: "Free Trial Class", link: "/freeTrialClass" },
+    btn2: { text: "Free Trial Class", link: "/free-trial-class" },
   },
 ];
 

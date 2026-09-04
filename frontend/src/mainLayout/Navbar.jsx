@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaChevronDown, FaChevronRight } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
+import { useMyProfileQuery } from "../app/api/userApi";
 
 const courses = [
   {
@@ -12,7 +13,10 @@ const courses = [
       { name: "Madni Qaida", path: "/courses/madni-qaida" },
       { name: "Nazra Quran", path: "/courses/nazra-quran" },
       { name: "Quran Memorization", path: "/courses/quran-memorization" },
-      {name: "Quran Interpretation & Translation", path: "/courses/quran-translation",},
+      {
+        name: "Quran Interpretation & Translation",
+        path: "/courses/quran-translation",
+      },
     ],
   },
   {
@@ -48,6 +52,10 @@ const Navbar = () => {
 
   const location = useLocation();
 
+  const { data, isLoading } = useMyProfileQuery();
+
+  const user = data?.user;
+
   // Navbar background on scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -72,13 +80,12 @@ const Navbar = () => {
 
   const isDarkPage =
     location.pathname.startsWith("/courses") ||
-    ["/login", "/signup", "/forgot-password", "/fee", "/contact", "/privacy-policy", "/terms-conditions"].includes(
-      location.pathname
-    );
+    [ "/login", "/signup", "/forgot-password", "/fee", "/contact", "/privacy-policy", "/terms-conditions",
+    ].includes(location.pathname);
 
   return (
     <>
-      {/*  NAVBAR  */}
+      {/* NAVBAR */}
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           isDarkPage || scrolled
@@ -218,13 +225,37 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* LOGIN */}
-          <div className="hidden lg:flex">
-            <Link to="/login">
-              <button className="px-5 py-2.5 bg-[#c9a050] text-white rounded-full font-semibold hover:bg-[#b8942e] transition">
-                Login
-              </button>
-            </Link>
+          {/* ⭐ DESKTOP LOGIN / USER IMAGE */}
+          <div className="hidden lg:flex items-center">
+
+            {isLoading ? (
+              // ⭐ LOADING
+              <div className="w-10 h-10 rounded-full bg-white/20 animate-pulse" />
+            ) : user ? (
+              // ⭐ LOGGED IN → USER IMAGE
+              <Link
+                to="/user-profile"
+              >
+                <img
+                  src={
+                    user.image ||
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                      user.name || "User"
+                    )}`
+                  }
+                  alt={user.name || "User Profile"}
+                  className="w-10 h-10 rounded-full object-cover border-2 border-[#c9a050] hover:scale-110 transition"
+                />
+              </Link>
+            ) : (
+              // ⭐ NOT LOGGED IN → LOGIN
+              <Link to="/login">
+                <button className="px-5 py-2.5 bg-[#c9a050] text-white rounded-full font-semibold hover:bg-[#b8942e] transition">
+                  Login
+                </button>
+              </Link>
+            )}
+
           </div>
 
           {/* MOBILE BUTTON */}
@@ -237,7 +268,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/*  MOBILE MENU  */}
+      {/* MOBILE MENU */}
       <div
         className={`fixed top-0 right-0 h-screen w-[85%] sm:w-[380px] bg-[#0a5c3a] text-white z-[60] shadow-2xl transition-transform duration-300 ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
@@ -296,7 +327,9 @@ const Navbar = () => {
             {/* MOBILE COURSES */}
             <div>
               <button
-                onClick={() => setMobileCoursesOpen(!mobileCoursesOpen)}
+                onClick={() =>
+                  setMobileCoursesOpen(!mobileCoursesOpen)
+                }
                 className="w-full flex justify-between items-center text-lg font-semibold"
               >
                 Courses
@@ -381,16 +414,45 @@ const Navbar = () => {
 
           </div>
 
-          {/* MOBILE LOGIN */}
+          {/* ⭐ MOBILE LOGIN / USER IMAGE */}
           <div className="mt-8 pt-6 border-t border-white/10">
-            <Link
-              to="/login"
-              onClick={() => setMobileOpen(false)}
-            >
-              <button className="w-full py-3 bg-[#c9a050] rounded-full font-semibold">
-                Login
-              </button>
-            </Link>
+
+            {isLoading ? (
+              // ⭐ LOADING
+              <div className="flex justify-center">
+                <div className="w-12 h-12 rounded-full bg-white/20 animate-pulse" />
+              </div>
+            ) : user ? (
+              // ⭐ LOGGED IN → USER IMAGE
+              <Link
+                to="/user-profile"
+                onClick={() => setMobileOpen(false)}
+                className="flex justify-center"
+                title={user.name || "User Profile"}
+              >
+                <img
+                  src={
+                    user.image ||
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                      user.name || "User"
+                    )}`
+                  }
+                  alt={user.name || "User Profile"}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-[#c9a050] hover:scale-110 transition"
+                />
+              </Link>
+            ) : (
+              // ⭐ NOT LOGGED IN → LOGIN
+              <Link
+                to="/login"
+                onClick={() => setMobileOpen(false)}
+              >
+                <button className="w-full py-3 bg-[#c9a050] rounded-full font-semibold">
+                  Login
+                </button>
+              </Link>
+            )}
+
           </div>
 
         </div>

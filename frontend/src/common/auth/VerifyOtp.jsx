@@ -104,10 +104,6 @@ const VerifyOtp = () => {
             <FaShieldHalved className="text-2xl text-[#0a5c3a]" />
           </div>
 
-          {/* <p className="text-[#c9a050] font-semibold text-sm">
-            VERIFICATION
-          </p> */}
-
           <h2 className="text-3xl font-bold text-[#0a5c3a] mt-2">
             Verify your email
           </h2>
