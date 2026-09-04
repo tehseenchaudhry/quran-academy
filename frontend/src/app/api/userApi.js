@@ -56,9 +56,18 @@
                 method:"GET",
              })
         }),
+         updateProfile: builder.mutation({
+             query:(credentials)=>({
+                url:"/user-profile",
+                method:"PUT",
+                body:credentials
+             })
+        }),
 
 
     })
  })
 
- export const {useSignUpMutation, useOtpVerifyMutation, useOtpResendMutation, useLogInMutation, useLogOutMutation, useMyProfileQuery} = authApi;
+ export const {useSignUpMutation, useOtpVerifyMutation, useOtpResendMutation, useLogInMutation, useLogOutMutation, useMyProfileQuery,
+    useUpdateProfileMutation
+ } = authApi;

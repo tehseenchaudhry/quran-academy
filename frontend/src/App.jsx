@@ -37,11 +37,11 @@ import TermsConditions from "./common/TermsConditions";
 import { ToastContainer } from "react-toastify";
   // AUTH Imports  
 import Login from "./common/auth/Login";
-import UserProfile from "./common/auth/UserProfile";
 import ResetPassword from "./common/auth/ResetPassword";
 import Signup from "./common/auth/Signup";
 import VerifyOtp from "./common/auth/VerifyOtp";
 import ForgotPassword from "./common/auth/ForgotPassword";
+import UserProfile from "./common/userProfile/UserProfile";
 
 // CLASS Imports 
 

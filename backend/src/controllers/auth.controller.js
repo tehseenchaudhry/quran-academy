@@ -301,3 +301,28 @@ export const userProfile = async (req, res) => {
 
 
 }
+
+
+export const updateProfile = async (req, res) => {
+  try {
+    const { name, email } = req.body;
+
+    const existingUser = await userModel.findById(req.user._id);
+
+    existingUser.name = name;
+    existingUser.email = email;
+
+    await existingUser.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      existingUser,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Profile update failed",
+    });
+  }
+};
